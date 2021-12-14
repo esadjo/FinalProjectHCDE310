@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <title>{{Lat and Long}}</title>
+</head>
+<body style="font-family: verdana">
+<style>
+    body{
+        font-family: Helvetica, sans-serif; /*verdana;*/ /*Helvetica, sans-serif;*/
+        color: black;
+        margin: 0;
+        padding: 0;
+      }
+
+    h1{
+        font-family: verdana;
+        color: #0C0B52;
+        font-size: 75px;
+    }
+
+    h2{
+        font-family: verdana;
+        color: #0C0B52;
+        font-size: 32px;
+    }
+
+    h3{
+        font-family: verdana;
+        color: black;
+    }
+
+    p {
+        font-family: verdana;
+        color: black;
+        font-size: 22px;
+    }
+
+    h4{
+        font-family: verdana;
+        color: #0C0B52; /*#385F7B;*/ /*#45a4d9;*/
+        font-size: 25px;
+        font-weight: normal;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        /*background-color: #0C0B52;*/
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        /*align-items: center;*/
+        padding: 30px 2%;
+    }
+
+    .logo {
+        cursor: pointer;
+        height: 40px;
+    }
+
+    button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #0C0B52;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        opacity: 1;
+        transition: 0.3s;
+        font-size: 16px;
+        cursor: pointer
+    }
+
+    button:hover {opacity: 0.6}
+        input[type=text] {
+        width: 60%;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border-radius: 12px;
+        margin: 8px 0;
+        background-color: #B9CFDF;
+        box-sizing: border-box;
+        border: 3px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+    }
+
+  .button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #0C0B52;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        opacity: 1;
+        transition: 0.3s;
+        font-size: 16px;
+        cursor: pointer
+            }
+  .button:hover {opacity: 0.6}
+  input[type=text] {
+        width: 60%;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border-radius: 12px;
+        margin: 8px 0;
+        background-color: #B9CFDF;
+        box-sizing: border-box;
+        border: 3px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+    }
+
+input[type=text]:focus {
+  border: 3px solid #0C0B52;
+}
+
+.user{
+    height: 350px;
+    width: 350px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 20px solid #FFFFFF; /*#E5E8EC;*/
+    margin: 50px;
+}
+
+.spacer{
+    margin: 100px;
+}
+
+.spacer-small{
+    margin: 30px;
+}
+
+.padding{
+    padding: 0px 0px 0px 0px; /* changed from 100 */
+}
+
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.welcome-image {
+    /*background-image: url("/static/images/welcome.png");
+    width:100%;
+    height:auto;
+    display: flex;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;*/
+    padding: 350px;
+    background-image: url("/static/images/welcome.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height = 100%;
+    display: flex;
+}
+
+
+
+</style>
+<center>
+    {% if user %}
+      <header>
+          <a href="https://spotintheweather.pythonanywhere.com/"><img class="logo" src="/static/images/logo.png" alt="logo"></a>
+          <a class="cta" href="/auth/logout"><button>Logout</button></a>
+      </header>
+        <div class="welcome-image">
+        	 <div class ="center padding">
+                <p>{% if user['img']%}<a href="{{user['profile_url']}}"><img src="{{user['img']}}" class="user center"/></a>{% endif %}</p>
+                <h2>{{ user['displayname']|escape }}</h2>
+            </div>
+        </div>
+        <div class="spacer">
+            <h2>First, enter in a location!</h2>
+            <label for="loc">Put in any location of your choice. Watch your spelling!</label>
+                <div class="spacer-small">
+                    <form action="track" method="get">
+                        <input type="text" id="city_state" name="city_state" />
+                        <button class="button" style="vertical-align:middle">
+                            <span>Let's Go! </span></button>
+                    </form>
+                </div>
+                {% if error %}
+                    <p>{{error}}</p>
+                    <p>{{errorMessage}}</p>
+                {% endif %}
+        </div>
+    {% endif %}
+    </center>
+</body>
+</html>
